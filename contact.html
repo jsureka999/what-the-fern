@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - what the fern</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f5fff6;
+    }
+
+    header {
+      background-color: #d0f0dc;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 4em;
+      color: #2d5934;
+      margin: 0 0 20px 0;
+    }
+
+    nav {
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 30px 0 0;
+      text-decoration: none;
+      font-weight: bold;
+      color: #2d5934;
+      font-size: 1.3em;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-form {
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #2d5934;
+      font-size: 1.1em;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #d0f0dc;
+      border-radius: 8px;
+      font-size: 1em;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #4caf50;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+    }
+
+    .form-group textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    .name-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .name-row .form-group {
+      flex: 1;
+    }
+
+    .submit-btn {
+      background-color: #4caf50;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+
+    .contact-info {
+      margin-top: 40px;
+      padding: 30px;
+      background-color: #f0f8f0;
+      border-radius: 10px;
+    }
+
+    .contact-info h3 {
+      color: #2d5934;
+      margin-bottom: 15px;
+    }
+
+    .contact-info p {
+      margin: 10px 0;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 2.5em;
+      color: #3d7d57;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>what the fern</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="plants.html">Plant Info</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact Us</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Contact Us</h2>
+    <p>Have questions about our plants or want to place a custom order? We'd love to hear from you!</p>
+
+    <div class="contact-form">
+      <form id="contactForm">
+        <div class="name-row">
+          <div class="form-group">
+            <label for="firstName">First Name *</label>
+            <input type="text" id="firstName" name="firstName" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name *</label>
+            <input type="text" id="lastName" name="lastName" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" placeholder="Tell us about your plant needs, ask questions, or let us know about custom orders!" required></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+
+    <div class="contact-info">
+      <h3>Other Ways to Reach Us</h3>
+      <p><strong>Email:</strong> hello@whatthefern.com</p>
+      <p><strong>Instagram:</strong> @whatthefern</p>
+      <p><strong>Response Time:</strong> Usually within 24 hours</p>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = new FormData(this);
+      const data = {
+        firstName: formData.get('firstName'),
+        lastName: formData.get('lastName'),
+        email: formData.get('email'),
+        message: formData.get('message'),
+        timestamp: new Date().toISOString()
+      };
+      
+      // Store in localStorage (simple solution for now)
+      let contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+      contacts.push(data);
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      
+      // Show success message
+      alert('Thank you for your message! We\'ll get back to you soon.');
+      this.reset();
+    });
+  </script>
+</body>
+</html> 

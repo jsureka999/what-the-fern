@@ -17,24 +17,33 @@
       background-color: #d0f0dc;
       padding: 40px 20px 20px 20px;
       text-align: center;
+      position: relative;
     }
 
     header h1 {
       font-size: 4em;
       color: #2d5934;
       margin: 0 0 20px 0;
+      position: relative;
+      z-index: 2;
+      background-color: #d0f0dc;
+      padding: 0 10px;
+      display: inline-block;
+      text-align: center;
     }
 
     nav {
       text-align: center;
+      width: 100%;
     }
 
     nav a {
-      margin: 0 30px 0 0;
+      margin: 0 20px;
       text-decoration: none;
       font-weight: bold;
       color: #2d5934;
       font-size: 1.3em;
+      display: inline-block;
     }
 
     .hero-section {
@@ -59,13 +68,18 @@
     }
 
     .hero-text {
-      color: white;
-      font-size: 3.5em;
-      font-weight: bold;
+      color: #ffffff;
+      font-size: 4.5em;
+      font-weight: 400;
       text-align: center;
       z-index: 1;
       position: relative;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      line-height: 1.2;
+    }
+
+    .hero-text .top-line {
+      display: block;
+      margin-bottom: 10px;
     }
 
     .features-section {
@@ -95,22 +109,22 @@
     .featured-plants, .coming-soon-plants {
       display: flex;
       justify-content: center;
-      gap: 40px;
+      gap: 80px;
       flex-wrap: wrap;
       margin-top: 30px;
       margin-bottom: 60px;
     }
 
     .plant-card img {
-      width: 180px;
-      height: 180px;
+      width: 250px;
+      height: 250px;
       object-fit: cover;
       border-radius: 10px;
       border: 1px dashed #ccc;
     }
 
     .plant-card h3 {
-      margin: 10px 0 5px 0;
+      margin: 15px 0 5px 0;
       font-size: 1.4em;
     }
 
@@ -147,7 +161,20 @@
     h1 {
       font-size: 3em;
       color: #2d5934;
+      position: relative;
+      display: inline-block;
     }
+
+                .fern-icon {
+        position: absolute;
+        left: 320px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 80px;
+        height: 120px;
+        z-index: -1;
+        opacity: 0.8;
+      }
 
     h2 {
       font-size: 2.5em;
@@ -157,49 +184,41 @@
 </head>
 <body>
   <header>
-    <h1>what the fern</h1>
+    <h1>
+      <img src="fern-icon.png" alt="Fern" class="fern-icon">
+      what the fern
+    </h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="plants.html">Plant Info</a>
       <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact Us</a>
     </nav>
   </header>
 
   <div class="hero-section">
-    <div class="hero-text">ENJOY YOUR COLLEGE-FRIENDLY GREENERY</div>
+    <div class="hero-text">
+      <span class="top-line">ENJOY YOUR</span>
+      COLLEGE-FRIENDLY GREENERY
+    </div>
   </div>
 
   <div class="features-section">
     <div class="features-grid">
-      <div class="feature-item">Hand picked, healthy plants</div>
-      <div class="feature-item">Care cards included with every plant</div>
-      <div class="feature-item">Perfect for beginners and small spaces</div>
+      <div class="feature-item">
+        <div style="font-size: 2em; margin-top: -10px; margin-bottom: 10px;">🌱</div>
+        Hand picked, healthy plants
+      </div>
+      <div class="feature-item">
+        <div style="font-size: 2em; margin-top: -10px; margin-bottom: 10px;">❤️</div>
+        Care cards included with every plant
+      </div>
+      <div class="feature-item">
+        <div style="font-size: 2em; margin-top: -10px; margin-bottom: 10px;">😊</div>
+        Perfect for beginners and small spaces
+      </div>
     </div>
   </div>
-
-  <section class="intro">
-    <h2>Welcome!</h2>
-  </section>
-
-  <section class="available-plants">
-    <div class="featured-plants">
-      <div class="plant-card">
-        <img src="swiss-cheese.jpg" alt="Swiss Cheese Plant">
-        <h3>Swiss Cheese</h3>
-        <p>$8</p>
-      </div>
-      <div class="plant-card">
-        <img src="pothos.jpg" alt="Pothos Plant">
-        <h3>Pothos</h3>
-        <p>$5</p>
-      </div>
-      <div class="plant-card">
-        <img src="bamboo.jpg" alt="Bamboo Plant">
-        <h3>Bamboo</h3>
-        <p>$12</p>
-      </div>
-    </div>
-  </section>
 
   <section class="bestsellers">
     <h2>Bestsellers</h2>
@@ -207,16 +226,33 @@
       <div class="plant-card">
         <img src="swiss-cheese.jpg" alt="Swiss Cheese Plant">
         <h3>Swiss Cheese</h3>
-        <p>$8</p>
       </div>
       <div class="plant-card">
         <img src="pothos.jpg" alt="Pothos Plant">
         <h3>Pothos</h3>
-        <p>$5</p>
       </div>
     </div>
     <div class="see-all">
       <a href="shop.html">See All Plants</a>
+    </div>
+  </section>
+
+  <section class="coming-soon">
+    <h2>🌿 Coming Soon</h2>
+    <p>These leafy stars are almost ready to shine. Stay tuned!</p>
+    <div class="coming-soon-plants">
+      <div class="plant-card">
+        <img src="mother-of-thousands.jpg" alt="Mother of Thousands">
+        <h3>Mother of Thousands</h3>
+      </div>
+      <div class="plant-card">
+        <img src="aloe-vera.jpg" alt="Aloe Vera">
+        <h3>Aloe Vera</h3>
+      </div>
+      <div class="plant-card">
+        <img src="arabian-jasmine.jpg" alt="Arabian Jasmine">
+        <h3>Arabian Jasmine</h3>
+      </div>
     </div>
   </section>
 </body>

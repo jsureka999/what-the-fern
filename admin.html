@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Contact Submissions</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5fff6;
+    }
+
+    header {
+      background-color: #2d5934;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .admin-controls {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .clear-btn {
+      background-color: #dc3545;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .clear-btn:hover {
+      background-color: #c82333;
+    }
+
+    .submissions-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .submission-card {
+      border-bottom: 1px solid #eee;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .submission-card:last-child {
+      border-bottom: none;
+    }
+
+    .submission-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .contact-name {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #2d5934;
+    }
+
+    .contact-email {
+      color: #666;
+      font-size: 1.1em;
+    }
+
+    .contact-date {
+      color: #999;
+      font-size: 0.9em;
+    }
+
+    .contact-message {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      border-left: 4px solid #4caf50;
+      margin-top: 10px;
+    }
+
+    .no-submissions {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+      font-size: 1.2em;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2em;
+      font-weight: bold;
+      color: #4caf50;
+    }
+
+    .stat-label {
+      color: #666;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Contact Submissions Admin</h1>
+  </header>
+
+  <main>
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number" id="totalSubmissions">0</div>
+        <div class="stat-label">Total Submissions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="todaySubmissions">0</div>
+        <div class="stat-label">Today</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" id="thisWeekSubmissions">0</div>
+        <div class="stat-label">This Week</div>
+      </div>
+    </div>
+
+    <div class="admin-controls">
+      <button class="clear-btn" onclick="clearAllSubmissions()">Clear All Submissions</button>
+    </div>
+
+    <div class="submissions-container" id="submissionsContainer">
+      <div class="no-submissions">No contact submissions yet.</div>
+    </div>
+  </main>
+
+  <script>
+    function loadSubmissions() {
+      const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+      const container = document.getElementById('submissionsContainer');
+      
+      // Update stats
+      document.getElementById('totalSubmissions').textContent = contacts.length;
+      
+      const today = new Date().toDateString();
+      const todaySubmissions = contacts.filter(contact => 
+        new Date(contact.timestamp).toDateString() === today
+      ).length;
+      document.getElementById('todaySubmissions').textContent = todaySubmissions;
+      
+      const weekAgo = new Date();
+      weekAgo.setDate(weekAgo.getDate() - 7);
+      const thisWeekSubmissions = contacts.filter(contact => 
+        new Date(contact.timestamp) > weekAgo
+      ).length;
+      document.getElementById('thisWeekSubmissions').textContent = thisWeekSubmissions;
+      
+      if (contacts.length === 0) {
+        container.innerHTML = '<div class="no-submissions">No contact submissions yet.</div>';
+        return;
+      }
+      
+      // Sort by timestamp (newest first)
+      contacts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      
+      container.innerHTML = contacts.map(contact => `
+        <div class="submission-card">
+          <div class="submission-header">
+            <div>
+              <div class="contact-name">${contact.firstName} ${contact.lastName}</div>
+              <div class="contact-email">${contact.email}</div>
+            </div>
+            <div class="contact-date">${new Date(contact.timestamp).toLocaleString()}</div>
+          </div>
+          <div class="contact-message">${contact.message}</div>
+        </div>
+      `).join('');
+    }
+    
+    function clearAllSubmissions() {
+      if (confirm('Are you sure you want to clear all contact submissions? This cannot be undone.')) {
+        localStorage.removeItem('contacts');
+        loadSubmissions();
+      }
+    }
+    
+    // Load submissions when page loads
+    loadSubmissions();
+    
+    // Refresh every 30 seconds to catch new submissions
+    setInterval(loadSubmissions, 30000);
+  </script>
+</body>
+</html> 

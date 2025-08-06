@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - what the fern</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f5fff6;
+    }
+
+    header {
+      background-color: #d0f0dc;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 4em;
+      color: #2d5934;
+      margin: 0 0 20px 0;
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .login-form {
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #2d5934;
+      font-size: 1.1em;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #d0f0dc;
+      border-radius: 8px;
+      font-size: 1em;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #4caf50;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+    }
+
+    .login-btn {
+      background-color: #4caf50;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+
+    .login-btn:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      background-color: #ffebee;
+      color: #c62828;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #ffcdd2;
+    }
+
+    .back-link {
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #2d5934;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    h2 {
+      font-size: 2.5em;
+      color: #3d7d57;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>what the fern</h1>
+  </header>
+
+  <main>
+    <h2>Admin Login</h2>
+
+    <div class="login-form">
+      {% if error %}
+      <div class="error-message">{{ error }}</div>
+      {% endif %}
+
+      <form method="POST">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+    </div>
+
+    <div class="back-link">
+      <a href="{{ url_for('index') }}">← Back to Home</a>
+    </div>
+  </main>
+</body>
+</html> 

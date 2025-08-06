@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Contact Submissions</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5fff6;
+    }
+
+    header {
+      background-color: #2d5934;
+      padding: 20px;
+      text-align: center;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    .header-controls {
+      margin-top: 10px;
+    }
+
+    .header-controls a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .header-controls a:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    main {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .admin-controls {
+      margin-bottom: 30px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .export-btn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .export-btn:hover {
+      background-color: #218838;
+    }
+
+    .clear-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .clear-btn:hover {
+      background-color: #c82333;
+    }
+
+    .submissions-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .submission-card {
+      border-bottom: 1px solid #eee;
+      padding: 20px;
+      text-align: left;
+    }
+
+    .submission-card:last-child {
+      border-bottom: none;
+    }
+
+    .submission-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .contact-name {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #2d5934;
+    }
+
+    .contact-email {
+      color: #666;
+      font-size: 1.1em;
+    }
+
+    .contact-date {
+      color: #999;
+      font-size: 0.9em;
+    }
+
+    .contact-message {
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      border-left: 4px solid #4caf50;
+      margin-top: 10px;
+    }
+
+    .status-controls {
+      margin-top: 15px;
+    }
+
+    .status-select {
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: white;
+    }
+
+    .status-new {
+      border-left-color: #ffc107;
+    }
+
+    .status-read {
+      border-left-color: #17a2b8;
+    }
+
+    .status-replied {
+      border-left-color: #28a745;
+    }
+
+    .no-submissions {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+      font-size: 1.2em;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2em;
+      font-weight: bold;
+      color: #4caf50;
+    }
+
+    .stat-label {
+      color: #666;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Contact Submissions Admin</h1>
+    <div class="header-controls">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-number">{{ stats.total }}</div>
+        <div class="stat-label">Total Submissions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">{{ stats.today }}</div>
+        <div class="stat-label">Today</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">{{ stats.new }}</div>
+        <div class="stat-label">New</div>
+      </div>
+    </div>
+
+    <div class="admin-controls">
+      <a href="{{ url_for('export_csv') }}" class="btn export-btn">Export to CSV</a>
+      <button class="btn clear-btn" onclick="clearAllSubmissions()">Clear All</button>
+    </div>
+
+    <div class="submissions-container">
+      {% if contacts %}
+        {% for contact in contacts %}
+        <div class="submission-card status-{{ contact.status }}">
+          <div class="submission-header">
+            <div>
+              <div class="contact-name">{{ contact.first_name }} {{ contact.last_name }}</div>
+              <div class="contact-email">{{ contact.email }}</div>
+            </div>
+            <div class="contact-date">{{ contact.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</div>
+          </div>
+          <div class="contact-message">{{ contact.message }}</div>
+          <div class="status-controls">
+            <label for="status-{{ contact.id }}">Status:</label>
+            <select class="status-select" id="status-{{ contact.id }}" onchange="updateStatus({{ contact.id }}, this.value)">
+              <option value="new" {% if contact.status == 'new' %}selected{% endif %}>New</option>
+              <option value="read" {% if contact.status == 'read' %}selected{% endif %}>Read</option>
+              <option value="replied" {% if contact.status == 'replied' %}selected{% endif %}>Replied</option>
+            </select>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="no-submissions">No contact submissions yet.</div>
+      {% endif %}
+    </div>
+  </main>
+
+  <script>
+    function updateStatus(contactId, status) {
+      fetch(`/api/contacts/${contactId}/status`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: status })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Update the card's status class
+          const card = document.querySelector(`#status-${contactId}`).closest('.submission-card');
+          card.className = `submission-card status-${status}`;
+        }
+      })
+      .catch(error => {
+        console.error('Error updating status:', error);
+        alert('Error updating status');
+      });
+    }
+
+    function clearAllSubmissions() {
+      if (confirm('Are you sure you want to clear all contact submissions? This cannot be undone.')) {
+        // This would need to be implemented in the backend
+        alert('Clear functionality would be implemented here');
+      }
+    }
+  </script>
+</body>
+</html> 
