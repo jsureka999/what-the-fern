@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>What the Fern - Shop</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #d8f3dc;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin-bottom: 10px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #2d6a4f;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .plant-row {
+      display: flex;
+      justify-content: center;
+      gap: 100px; /* updated from 75px to 100px */
+      flex-wrap: wrap;
+    }
+
+    .plant-card {
+      width: 200px;
+      text-align: center;
+    }
+
+    .plant-card img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .plant-card h3 {
+      margin: 10px 0 5px;
+      font-size: 1.4em;
+    }
+
+    .plant-card p {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .coming-soon-plants {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      margin-bottom: 60px;
+    }
+
+    section {
+      margin: 60px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>what the fern</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="plants.html">Plant Info</a>
+      <a href="shop.html">Shop</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Available Plants</h2>
+    <div class="plant-row">
+      <div class="plant-card">
+        <img src="swiss-cheese.jpg" alt="Swiss Cheese Plant">
+        <h3>Swiss Cheese</h3>
+        <p>$8</p>
+      </div>
+      <div class="plant-card">
+        <img src="pothos.jpg" alt="Pothos Plant">
+        <h3>Pothos</h3>
+        <p>$5</p>
+      </div>
+      <div class="plant-card">
+        <img src="bamboo.jpg" alt="Bamboo Plant">
+        <h3>Bamboo</h3>
+        <p>$12</p>
+      </div>
+    </div>
+  </main>
+
+  <section class="coming-soon">
+    <h2>🌿 Coming Soon</h2>
+    <p>These leafy stars are almost ready to shine. Stay tuned!</p>
+    <div class="coming-soon-plants">
+      <div class="plant-card">
+        <img src="mother-of-thousands.jpg" alt="Mother of Thousands">
+        <h3>Mother of Thousands</h3>
+      </div>
+      <div class="plant-card">
+        <img src="aloe-vera.jpg" alt="Aloe Vera">
+        <h3>Aloe Vera</h3>
+      </div>
+      <div class="plant-card">
+        <img src="arabian-jasmine.jpg" alt="Arabian Jasmine">
+        <h3>Arabian Jasmine</h3>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

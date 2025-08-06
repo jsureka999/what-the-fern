@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>What the Fern</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f5fff6;
+    }
+
+    header {
+      background-color: #d0f0dc;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 4em;
+      color: #2d5934;
+      margin: 0 0 20px 0;
+    }
+
+    nav {
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 30px 0 0;
+      text-decoration: none;
+      font-weight: bold;
+      color: #2d5934;
+      font-size: 1.3em;
+    }
+
+    .hero-section {
+      background-image: url('background.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-text {
+      color: white;
+      font-size: 3.5em;
+      font-weight: bold;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .features-section {
+      background-color: #f0f0f0;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .features-grid {
+      display: flex;
+      justify-content: space-around;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 40px;
+    }
+
+    .feature-item {
+      flex: 1;
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    section {
+      margin: 60px 0;
+    }
+
+    .featured-plants, .coming-soon-plants {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      margin-bottom: 60px;
+    }
+
+    .plant-card img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px dashed #ccc;
+    }
+
+    .plant-card h3 {
+      margin: 10px 0 5px 0;
+      font-size: 1.4em;
+    }
+
+    .plant-card p {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .why ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .why li {
+      margin-bottom: 10px;
+    }
+
+    .see-all {
+      margin-top: 10px;
+      margin-bottom: 60px;
+    }
+
+    .see-all a {
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #4caf50;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #2d5934;
+    }
+
+    h2 {
+      font-size: 2.5em;
+      color: #3d7d57;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>what the fern</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="plants.html">Plant Info</a>
+      <a href="shop.html">Shop</a>
+    </nav>
+  </header>
+
+  <div class="hero-section">
+    <div class="hero-text">ENJOY YOUR COLLEGE-FRIENDLY GREENERY</div>
+  </div>
+
+  <div class="features-section">
+    <div class="features-grid">
+      <div class="feature-item">Hand picked, healthy plants</div>
+      <div class="feature-item">Care cards included with every plant</div>
+      <div class="feature-item">Perfect for beginners and small spaces</div>
+    </div>
+  </div>
+
+  <section class="intro">
+    <h2>Welcome!</h2>
+  </section>
+
+  <section class="available-plants">
+    <div class="featured-plants">
+      <div class="plant-card">
+        <img src="swiss-cheese.jpg" alt="Swiss Cheese Plant">
+        <h3>Swiss Cheese</h3>
+        <p>$8</p>
+      </div>
+      <div class="plant-card">
+        <img src="pothos.jpg" alt="Pothos Plant">
+        <h3>Pothos</h3>
+        <p>$5</p>
+      </div>
+      <div class="plant-card">
+        <img src="bamboo.jpg" alt="Bamboo Plant">
+        <h3>Bamboo</h3>
+        <p>$12</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bestsellers">
+    <h2>Bestsellers</h2>
+    <div class="featured-plants">
+      <div class="plant-card">
+        <img src="swiss-cheese.jpg" alt="Swiss Cheese Plant">
+        <h3>Swiss Cheese</h3>
+        <p>$8</p>
+      </div>
+      <div class="plant-card">
+        <img src="pothos.jpg" alt="Pothos Plant">
+        <h3>Pothos</h3>
+        <p>$5</p>
+      </div>
+    </div>
+    <div class="see-all">
+      <a href="shop.html">See All Plants</a>
+    </div>
+  </section>
+</body>
+</html>
+
